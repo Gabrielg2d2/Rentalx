@@ -1,7 +1,8 @@
 {
   "env": {
     "node": true,
-    "es2021": true
+    "es2021": true,
+    "jest": true
   },
   "extends": "standard-with-typescript",
   "parser": "@typescript-eslint/parser",
@@ -12,6 +13,7 @@
     "project": ["./tsconfig.json"]
   },
   "rules": {
-    "camelcase": "off"
+    "camelcase": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off"
   }
 }

@@ -3,6 +3,7 @@
   "reporter": ["text", "html"],
   "include": ["src/**/*.ts"],
   "exclude": ["**/*.spec.ts", "**/*.test.ts", "**/*.d.ts"],
+  "check-coverage": true,
   "branches": 100,
   "functions": 100,
   "lines": 100,

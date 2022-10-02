@@ -1,0 +1,10 @@
+{
+  "all": true,
+  "reporter": ["text", "html"],
+  "include": ["src/**/*.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "**/*.d.ts"],
+  "branches": 100,
+  "functions": 100,
+  "lines": 100,
+  "statements": 100
+}

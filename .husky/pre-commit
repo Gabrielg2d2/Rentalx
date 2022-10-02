@@ -4,3 +4,4 @@
 npx lint-staged
 npm run lint
 npx nyc check-coverage
+npm test

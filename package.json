@@ -47,5 +47,10 @@
       "eslint --cache --fix",
       "prettier --write"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test && npx nyc check-coverage"
+    }
   }
 }

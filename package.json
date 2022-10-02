@@ -7,7 +7,7 @@
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "commit": "git-cz",
-    "lint": "eslint src/**/*.{js,ts} --max-warnings=0",
+    "lint": "eslint src/** --max-warnings=0",
     "prepare": "husky install",
     "coverage": "nyc npm run test"
   },
@@ -35,7 +35,13 @@
     "typescript": "^4.8.4"
   },
   "lint-staged": {
-    "src/**/*.{js,ts}": [
+    "src/**/*.ts": [
+      "pretty-quick --staged",
+      "npm run lint --fix",
+      "eslint --cache --fix",
+      "prettier --write"
+    ],
+    "src/*.ts": [
       "pretty-quick --staged",
       "npm run lint --fix",
       "eslint --cache --fix",

@@ -3,4 +3,4 @@
 
 npx lint-staged
 npm run lint
-npm run coverage
+npx nyc check-coverage

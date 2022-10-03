@@ -6,8 +6,11 @@
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "test": "jest --passWithNoTests",
+    "test:watch": "jest --watchAll --passWithNoTests",
+    "test:cov": "jest --coverage --passWithNoTests",
     "commit": "git-cz",
-    "lint": "eslint ./src/** --max-warnings=0"
+    "lint": "eslint ./src/** --max-warnings=0",
+    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC",
@@ -34,20 +37,10 @@
     "typescript": "^4.8.4"
   },
   "lint-staged": {
-    "src/**/*.ts": [
-      "npm run lint --fix",
-      "eslint --cache --fix",
-      "prettier --write"
-    ],
-    "src/*.ts": [
+    "src/**": [
       "npm run lint --fix",
       "eslint --cache --fix",
       "prettier --write"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && npm run test && npx nyc check-coverage"
-    }
   }
 }

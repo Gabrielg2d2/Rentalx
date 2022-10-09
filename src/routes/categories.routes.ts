@@ -6,7 +6,7 @@ const categoriesRoutes = Router()
 
 const categoriesRepository = new CategoriesRepository()
 
-categoriesRoutes.post('/categories', (request, response) => {
+categoriesRoutes.post('/', (request, response) => {
   const { name, description } = request.body
 
   const createCategoryService = new CreateCategoryService(categoriesRepository)
@@ -16,7 +16,7 @@ categoriesRoutes.post('/categories', (request, response) => {
   return response.status(201).json(category)
 })
 
-categoriesRoutes.get('/categories', (request, response) => {
+categoriesRoutes.get('/', (request, response) => {
   categoriesRepository
     .list()
     .then((categories) => response.status(200).json(categories))

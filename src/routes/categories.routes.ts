@@ -3,19 +3,22 @@ import { CategoriesRepository } from '../repositories/CategoriesRepository'
 
 const categoriesRoutes = Router()
 
+const categoriesRepository = new CategoriesRepository()
+
 categoriesRoutes.post('/categories', (request, response) => {
   const { name, description } = request.body
 
-  const categoriesRepository = new CategoriesRepository()
-
   categoriesRepository
     .create({ name, description })
-    .then((category) => {
-      return response.status(201).json(category)
-    })
-    .catch((error) => {
-      return response.status(400).json({ error: error.message })
-    })
+    .then((category) => response.status(201).json(category))
+    .catch((error) => response.status(400).json({ error: error.message }))
+})
+
+categoriesRoutes.get('/categories', (request, response) => {
+  categoriesRepository
+    .list()
+    .then((categories) => response.status(200).json(categories))
+    .catch((error) => response.status(400).json({ error: error.message }))
 })
 
 export { categoriesRoutes }

@@ -22,8 +22,8 @@ export class CategoriesRepository {
 
   async create({ name, description }: ICreateProps): Promise<ICreateReturn> {
     return await new Promise((resolve, reject) => {
-      if (this.categories.find((category) => category.name === name)) {
-        reject(new Error('Category already exists'))
+      if (this.findByName(name)) {
+        return reject(new Error('Category already exists'))
       }
 
       const category = new Category({
@@ -42,5 +42,16 @@ export class CategoriesRepository {
 
       resolve(categoryCreated)
     })
+  }
+
+  async list(): Promise<Category[]> {
+    return await new Promise((resolve) => {
+      resolve(this.categories)
+    })
+  }
+
+  findByName(name: string): boolean {
+    const category = this.categories.some((category) => category.name === name)
+    return category
   }
 }

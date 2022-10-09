@@ -5,7 +5,7 @@ interface ICreateProps {
   description: string
 }
 
-interface ICreateReturn {
+export interface ICreateReturn {
   id: string
   name: string
   description: string

@@ -1,19 +1,11 @@
 import { Category } from '../models/Category'
+import {
+  ICategoriesRepository,
+  ICreateProps,
+  ICreateReturn
+} from './ICategoriesRepository'
 
-interface ICreateProps {
-  name: string
-  description: string
-}
-
-export interface ICreateReturn {
-  id: string
-  name: string
-  description: string
-  created_at: Date
-  status: number
-}
-
-export class CategoriesRepository {
+export class CategoriesRepository implements ICategoriesRepository {
   private readonly categories: Category[]
 
   constructor() {

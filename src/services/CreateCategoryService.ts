@@ -1,17 +1,12 @@
 import {
-  CategoriesRepository,
-  ICreateReturn
-} from '../repositories/CategoriesRepository'
-
-interface IRequest {
-  name: string
-  description: string
-}
+  ICategoriesRepository,
+  ICreateProps
+} from '../repositories/ICategoriesRepository'
 
 export class CreateCategoryService {
-  constructor(private readonly categoriesRepository: CategoriesRepository) {}
+  constructor(private readonly categoriesRepository: ICategoriesRepository) {}
 
-  async execute({ name, description }: IRequest): Promise<ICreateReturn> {
+  async execute({ name, description }: ICreateProps): Promise<ICreateProps> {
     const categoryAlreadyExists = this.categoriesRepository.findByName(name)
 
     if (categoryAlreadyExists) {

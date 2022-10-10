@@ -1,54 +1,67 @@
 import { SpecificationRepository } from '../../SpecificationRepository'
 
-describe('SpecificationRepository', () => {
+describe('unit - SpecificationRepository', () => {
   const mockSpecificationReturn = {
     id: '1',
-    name: 'Specification Test',
+    name: 'Specification name Test',
     description: 'Specification description Test',
-    created_at: new Date(),
+    created_at: new Date('2022-10-10T02:02:39'),
     status: 201
   }
-  const specificationMockCreate = jest
-    .fn()
-    .mockReturnValue(mockSpecificationReturn)
 
-  it('should be able to create a new specification', () => {
-    // const specificationRepository = new SpecificationRepository()
-
+  it('should be able to create a new specification spyOn', () => {
     const specification = {
-      name: 'Specification Test',
+      name: 'Specification name Test',
       description: 'Specification description Test'
     }
+    const specificationRepository = new SpecificationRepository()
 
-    const response = specificationMockCreate(specification)
+    const somethingSpy = jest
+      .spyOn(specificationRepository, 'create')
+      .mockReturnValue({
+        id: '1',
+        name: 'Specification name Test',
+        description: 'Specification description Test',
+        created_at: new Date('2022-10-10T02:02:39'),
+        status: 201
+      })
 
+    specificationRepository.create(specification)
+
+    const response = somethingSpy.mock.results[0].value
+
+    expect(somethingSpy).toHaveBeenCalled()
+    expect(somethingSpy).toHaveBeenCalledTimes(1)
     expect(response).toHaveProperty('id')
     expect(response).toHaveProperty('name')
     expect(response).toHaveProperty('description')
-    expect(response).toHaveProperty('status')
     expect(response).toHaveProperty('created_at')
-    expect(response.name).toEqual(specification.name)
-    expect(response.description).toEqual(specification.description)
-    expect(response.status).toEqual(201)
+    expect(response).toHaveProperty('status')
+    expect(response.id).toBe(mockSpecificationReturn.id)
+    expect(response.name).toBe(mockSpecificationReturn.name)
   })
 
-  it('should be able to find a specification by name', () => {
+  it('should filter through name with findByName', () => {
     const specificationRepository = new SpecificationRepository()
 
-    const specification = {
-      name: 'Specification Test',
-      description: 'Specification description Test'
-    }
+    const somethingSpy = jest
+      .spyOn(specificationRepository, 'findByName')
+      .mockReturnValue({
+        name: 'Specification name Test',
+        description: 'Specification description Test'
+      })
 
-    const response = specificationRepository.create(specification)
+    specificationRepository.findByName('Specification name Test')
 
-    if (response) {
-      const specificationFound = specificationRepository.findByName(
-        specification.name
-      )
+    const response = somethingSpy.mock.results[0].value
 
-      expect(specificationFound?.name).toEqual(response.name)
-      expect(specificationFound?.description).toEqual(response.description)
-    }
+    expect(somethingSpy).toHaveBeenCalled()
+    expect(somethingSpy).toHaveBeenCalledTimes(1)
+
+    expect(response).toHaveProperty('name')
+    expect(response).toHaveProperty('description')
+
+    expect(response.name).toBe(mockSpecificationReturn.name)
+    expect(response.description).toBe(mockSpecificationReturn.description)
   })
 })

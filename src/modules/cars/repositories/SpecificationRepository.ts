@@ -18,6 +18,17 @@ export class SpecificationRepository implements ISpecificationRepository {
   }: ICreateSpecificationDTO): ISpecificationRepositoryReturn {
     const specification = new Specification({ name, description })
 
+    const isExist = this.specifications.some(
+      (specification) => specification.name === name
+    )
+
+    if (isExist) {
+      return {
+        status: 400,
+        message: 'Specification already exists'
+      }
+    }
+
     const specificationCreated = {
       id: new Date().getTime().toString(),
       created_at: new Date(),

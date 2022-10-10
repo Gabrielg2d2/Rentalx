@@ -3,13 +3,22 @@ export interface ICreateSpecificationDTO {
   description: string
 }
 
-export interface ISpecificationRepositoryReturn {
+interface ISpecificationRepositoryReturnSuccess {
   id: string
   name: string
   description: string
   status: number
   created_at: Date
 }
+
+interface ISpecificationRepositoryReturnError {
+  status: number
+  message: string
+}
+
+export type ISpecificationRepositoryReturn =
+  | ISpecificationRepositoryReturnSuccess
+  | ISpecificationRepositoryReturnError
 
 export interface ISpecificationRepository {
   create: ({

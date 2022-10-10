@@ -1,9 +1,9 @@
 import {
   ICategoriesRepository,
   ICreateProps
-} from '../repositories/ICategoriesRepository'
+} from '../../repositories/ICategoriesRepository'
 
-export class CreateCategoryService {
+export class CreateCategoryUseCase {
   constructor(private readonly categoriesRepository: ICategoriesRepository) {}
 
   async execute({ name, description }: ICreateProps): Promise<ICreateProps> {

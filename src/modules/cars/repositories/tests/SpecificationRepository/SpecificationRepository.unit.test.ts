@@ -9,13 +9,19 @@ describe('unit - SpecificationRepository', () => {
     status: 201
   }
 
-  it('should be able to create a new specification spyOn', () => {
-    const specification = {
-      name: 'Specification name Test',
-      description: 'Specification description Test'
-    }
-    const specificationRepository = new SpecificationRepository()
+  const specification = {
+    name: 'Specification name Test',
+    description: 'Specification description Test'
+  }
 
+  let specificationRepository: SpecificationRepository
+
+  beforeEach(() => {
+    jest.clearAllMocks()
+    specificationRepository = new SpecificationRepository()
+  })
+
+  it('should be able to create a new specification spyOn', () => {
     const somethingSpy = jest
       .spyOn(specificationRepository, 'create')
       .mockReturnValue({
@@ -42,14 +48,9 @@ describe('unit - SpecificationRepository', () => {
   })
 
   it('should filter through name with findByName', () => {
-    const specificationRepository = new SpecificationRepository()
-
     const somethingSpy = jest
       .spyOn(specificationRepository, 'findByName')
-      .mockReturnValue({
-        name: 'Specification name Test',
-        description: 'Specification description Test'
-      })
+      .mockReturnValue(specification)
 
     specificationRepository.findByName('Specification name Test')
 

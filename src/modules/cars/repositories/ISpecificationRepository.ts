@@ -3,7 +3,18 @@ export interface ICreateSpecificationDTO {
   description: string
 }
 
+export interface ISpecificationRepositoryReturn {
+  id: string
+  name: string
+  description: string
+  status: number
+  created_at: Date
+}
+
 export interface ISpecificationRepository {
-  create: ({ name, description }: ICreateSpecificationDTO) => void
+  create: ({
+    name,
+    description
+  }: ICreateSpecificationDTO) => ISpecificationRepositoryReturn
   findByName: (name: string) => ICreateSpecificationDTO | undefined
 }

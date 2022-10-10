@@ -1,7 +1,8 @@
 import { Specification } from '../models/Specification'
 import {
   ISpecificationRepository,
-  ICreateSpecificationDTO
+  ICreateSpecificationDTO,
+  ISpecificationRepositoryReturn
 } from './ISpecificationRepository'
 
 export class SpecificationRepository implements ISpecificationRepository {
@@ -11,7 +12,10 @@ export class SpecificationRepository implements ISpecificationRepository {
     this.specifications = []
   }
 
-  create({ name, description }: ICreateSpecificationDTO): void {
+  create({
+    name,
+    description
+  }: ICreateSpecificationDTO): ISpecificationRepositoryReturn {
     const specification = new Specification({ name, description })
 
     const specificationCreated = {
@@ -22,6 +26,7 @@ export class SpecificationRepository implements ISpecificationRepository {
     }
 
     this.specifications.push(specificationCreated)
+    return specificationCreated
   }
 
   findByName(name: string): ICreateSpecificationDTO | undefined {

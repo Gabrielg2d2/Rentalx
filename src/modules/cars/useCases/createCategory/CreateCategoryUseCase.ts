@@ -1,3 +1,4 @@
+import { ICategory } from '../../models/Category'
 import {
   ICategoriesRepository,
   ICreateProps
@@ -6,14 +7,8 @@ import {
 export class CreateCategoryUseCase {
   constructor(private readonly categoriesRepository: ICategoriesRepository) {}
 
-  async execute({ name, description }: ICreateProps): Promise<ICreateProps> {
-    const categoryAlreadyExists = this.categoriesRepository.findByName(name)
-
-    if (categoryAlreadyExists) {
-      throw new Error('Category already exists!')
-    }
-
-    const response = await this.categoriesRepository.create({
+  execute({ name, description }: ICreateProps): ICategory {
+    const response = this.categoriesRepository.create({
       name,
       description
     })

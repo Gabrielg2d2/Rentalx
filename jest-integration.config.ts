@@ -1,21 +1,7 @@
-export default {
-  testMatch: ['**/?(*.integration.)+(spec|test).ts'],
-  preset: 'ts-jest',
-  clearMocks: true,
-  collectCoverage: true,
-  coverageDirectory: 'coverage',
-  coverageProvider: 'v8',
-  coverageReporters: ['json', 'text', 'lcov', 'clover'],
-  coverageThreshold: {
-    global: {
-      branches: 100,
-      functions: 100,
-      lines: 100,
-      statements: 100
-    }
-  },
-  maxWorkers: '50%',
-  testEnvironment: 'jest-environment-node',
-  testPathIgnorePatterns: ['/node_modules/'],
-  roots: ['<rootDir>/src']
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const config = require('./jest.config')
+
+module.exports = {
+  ...config,
+  testMatch: ['**/?(*.integration.)+(spec|test).[jt]s?(x)']
 }

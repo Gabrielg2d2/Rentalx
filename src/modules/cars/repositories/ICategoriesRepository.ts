@@ -15,6 +15,6 @@ export interface ICreateReturn {
 
 export interface ICategoriesRepository {
   findByName: (name: string) => boolean
-  list: () => Promise<ICategory[]>
-  create: ({ name, description }: ICreateProps) => Promise<ICategory>
+  list: () => ICategory[]
+  create: ({ name, description }: ICreateProps) => ICategory
 }

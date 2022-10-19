@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   preset: 'ts-jest',
   testMatch: ['**/?(*.)+(spec|test).(js|jsx|ts|tsx)'],
   clearMocks: true,

@@ -8,31 +8,34 @@ import {
 export class SpecificationRepository implements ISpecificationRepository {
   private readonly specifications: Specification[]
 
+  private static INSTANCE: SpecificationRepository
+
   constructor() {
     this.specifications = []
+  }
+
+  public static getInstance(): SpecificationRepository {
+    if (!SpecificationRepository.INSTANCE) {
+      SpecificationRepository.INSTANCE = new SpecificationRepository()
+    }
+    return SpecificationRepository.INSTANCE
   }
 
   create({
     name,
     description
   }: ICreateSpecificationDTO): ISpecificationRepositoryReturn {
-    const specification = new Specification({ name, description })
-
-    const isExist = this.specifications.some(
-      (specification) => specification.name === name
-    )
+    const isExist = this.findByName(name)
 
     if (isExist) {
-      return {
-        status: 400,
-        message: 'Specification already exists'
-      }
+      throw new Error('Specification already exists!')
     }
+
+    const specification = new Specification({ name, description })
 
     const specificationCreated = {
       id: new Date().getTime().toString(),
       created_at: new Date(),
-      status: 201,
       ...specification
     }
 
@@ -40,8 +43,8 @@ export class SpecificationRepository implements ISpecificationRepository {
     return specificationCreated
   }
 
-  findByName(name: string): ICreateSpecificationDTO | undefined {
-    const specification = this.specifications.find(
+  findByName(name: string): boolean {
+    const specification = this.specifications.some(
       (specification) => specification.name === name
     )
     return specification

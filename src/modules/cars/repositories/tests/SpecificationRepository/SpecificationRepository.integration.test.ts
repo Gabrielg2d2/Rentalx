@@ -14,10 +14,13 @@ describe('integration - SpecificationRepository', () => {
 
   it('should return a status and an error message', () => {
     specificationRepository.create(specification)
-    const response = specificationRepository.create(specification)
+    const response = specificationRepository.create({
+      name: 'New name',
+      description: 'New description'
+    })
 
-    expect(response).toHaveProperty('status')
-    expect(response).toHaveProperty('message')
+    expect(response).toHaveProperty('name')
+    expect(response).toHaveProperty('description')
   })
 
   it('should be able to create a new specification', () => {
@@ -27,7 +30,6 @@ describe('integration - SpecificationRepository', () => {
     expect(response).toHaveProperty('name')
     expect(response).toHaveProperty('description')
     expect(response).toHaveProperty('created_at')
-    expect(response).toHaveProperty('status')
   })
 
   it('should filter through name with findByName', () => {
@@ -37,8 +39,6 @@ describe('integration - SpecificationRepository', () => {
       'Specification name Test'
     )
 
-    expect(response).toHaveProperty('name')
-    expect(response).toHaveProperty('description')
-    expect(response?.name).toBe(specification.name)
+    expect(response).toBe(true)
   })
 })

@@ -1,4 +1,4 @@
-import { SpecificationRepository } from '../../SpecificationRepository'
+import { SpecificationRepository } from '../../implementations/SpecificationRepository'
 
 describe('unit - SpecificationRepository', () => {
   const mockSpecificationReturn = {

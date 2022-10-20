@@ -1,5 +1,5 @@
-import { Category } from '../models/Category'
-import { ICategoriesRepository, ICreateProps } from './ICategoriesRepository'
+import { Category } from '../../models/Category'
+import { ICategoriesRepository, ICreateProps } from '../ICategoriesRepository'
 
 export class CategoriesRepository implements ICategoriesRepository {
   private readonly categories: Category[]

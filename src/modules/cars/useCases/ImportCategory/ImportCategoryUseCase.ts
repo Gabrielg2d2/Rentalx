@@ -26,9 +26,9 @@ export class ImportCategoryUseCase {
           const [name, description] = line
           categories.push({ name, description })
         })
-        .on('end', () => {
-          // eslint-disable-next-line @typescript-eslint/indent
-          // fs.promises.unlink(file.path)
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        .on('end', async () => {
+          await fs.promises.unlink(file.path)
           resolve(categories)
         })
         .on('error', (err) => reject(err))

@@ -13,7 +13,7 @@
     "test:integration:watch": "jest --config=jest-integration.config.js --watchAll",
     "test:cov": "jest --coverage --passWithNoTests",
     "commit": "git-cz",
-    "lint": "eslint ./src/** --max-warnings=0",
+    "lint": "eslint src --max-warnings=0",
     "prepare": "husky install"
   },
   "author": "",
@@ -46,7 +46,7 @@
     "typescript": "^4.8.4"
   },
   "lint-staged": {
-    "src/**": [
+    "src": [
       "npm run lint --fix",
       "eslint --cache --fix",
       "prettier --write"
